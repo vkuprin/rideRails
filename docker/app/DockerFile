@@ -1,0 +1,55 @@
+FROM ruby:2.6.3
+
+RUN \
+  curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+  && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update -qq \
+  && apt-get install -y build-essential libpq-dev nodejs yarn
+
+ENV RAILS_ROOT /var/www/xop-landing-page
+RUN mkdir -p $RAILS_ROOT
+
+WORKDIR $RAILS_ROOT
+
+ENV RAILS_ENV='production'
+ENV RACK_ENV='production'
+
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN gem install bundler
+RUN gem install nokogiri -v '1.10.4'
+RUN gem install nio4r -v '2.5.2'
+RUN gem install websocket-driver -v '0.7.1'
+RUN gem install bindex -v '0.8.1'
+RUN gem install msgpack -v '1.3.1'
+RUN gem install bootsnap -v '1.4.5'
+RUN gem install byebug -v '11.0.1'
+RUN gem install ffi -v '1.11.1'
+RUN gem install mini_racer -v '0.2.6'
+RUN gem install pg -v '1.1.4'
+RUN gem install puma -v '3.12.1'
+
+RUN bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java
+RUN bundle install
+RUN bundle update
+
+COPY package.json package.json
+COPY yarn.lock yarn.lock
+
+RUN yarn install
+
+COPY . .
+
+RUN mkdir tmp/pids
+
+RUN bundle exec rake assets:precompile
+
+EXPOSE 3000
+
+#bundle exec puma -e production -b unix:///var/www/xop-landing-page/tmp/puma.sock --pidfile /var/www/xop-landing-page/tmp/pids/puma.pid -d
+#CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+#CMD ["/var/www/xop-landing-page/bin/webd", "start"]
+
+CMD ["bundle", "exec", "puma", "-e", "production", "--port", "3000", "-b", "unix:///var/www/xop-landing-page/tmp/puma.sock", "--pidfile", "/var/www/xop-landing-page/tmp/pids/puma.pid"]

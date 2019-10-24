@@ -1,0 +1,43 @@
+.file-download {
+  margin-top: 100px;
+  margin-bottom: 50px;
+
+  .file-name {
+    font-family: Nunito;
+    font-size: 20px;
+    line-height: 27px;
+    color: #1a3a67;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .separator {
+    margin: 10px 0px 20px 0px;
+  }
+
+  .file-description {
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    color: #233d63;
+    font-weight: 300;
+    text-align: left;
+    line-height: 25px;
+  }
+
+  .file-footer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+
+    .icon{
+      padding-right: 10px;
+    }
+
+    .readMore {
+      .button {
+        font-size: 16px;
+        padding: 10px 20px 10px 20px;
+      }
+    }
+  }
+}

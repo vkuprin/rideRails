@@ -1,0 +1,113 @@
+.head {
+  position: relative;
+  background-color: white;
+  //background: url('../../../../assets/images/backgroundBall.png');
+  //background-size: contain;
+  //background-repeat: no-repeat;
+  //background-position: 50%;
+  .inner-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.head_info {
+  margin-top: 60px;
+  flex-direction: column;
+
+  .readMore {
+    margin-top: 65px;
+    margin-bottom: 45px;
+  }
+}
+
+.head_title {
+  width: 620px;
+  height: 34px;
+  font-family: Nunito;
+  font-size: 48px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #223c5d;
+}
+
+.head_subtitle {
+  width: 499px;
+  height: 42px;
+  font-family: Lato;
+  font-size: 48px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #223c5d;
+}
+
+.head_description {
+  width: 561px;
+  height: 79px;
+  font-family: Lato;
+  font-size: 24px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #233d63;
+}
+
+.side_container {
+  // position: absolute;
+  // top: -81px;
+  // right: 0px;
+  // display: block;
+}
+
+.side_image {
+  width: 624px;
+  height: 720px;
+}
+
+@media only screen and (max-width: 1235px) {
+  .head_title {
+    width: 347px;
+    height: 76px;
+    font-family: Nunito;
+    font-size: 39.5px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+  }
+  .head_description {
+    margin-top: 55px;
+    width: 333px;
+    height: 89px;
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+  }
+  .side_container {
+    display: none;
+  }
+
+  .head_subtitle {
+    font-size: 32px;
+    width: 300px;
+    margin-top: 50px;
+  }
+}

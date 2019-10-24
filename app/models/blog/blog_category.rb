@@ -1,0 +1,3 @@
+class BlogCategory < ApplicationRecord
+
+end

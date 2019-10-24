@@ -1,0 +1,8 @@
+<% content_for :meta_title, "Data Sheets" %>
+<% content_for :meta_description, "" %>
+
+<%= react_component("PageTitle", props: {title: "Data Sheets"}, prerender: false) %>
+
+<pre>
+  <%= @literature.inspect %>
+</pre>

@@ -1,0 +1,22 @@
+.detailed-feature-list-item {
+  display: flex;
+  flex-direction: row;
+  line-height: 30px;
+  margin-bottom: 10px;
+
+  .icon {
+    color: #b0be36;
+    width: 40px;
+    display: flex;
+    vertical-align: center;
+    align-items: center;
+  }
+
+  .text {
+    color: #233d63;
+    font-family: Lato;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+  }
+}

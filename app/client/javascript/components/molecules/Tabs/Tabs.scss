@@ -1,0 +1,30 @@
+.tab-list {
+  padding-left: 0;
+}
+
+.tabs {
+  width: 66%;
+  margin: 0 auto;
+}
+
+.tab-list-item {
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #43597a;
+  cursor: pointer;
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+}
+
+.tab-list-active {
+  font-weight: bold;
+  color: #b0be36;
+  background-color: white;
+}

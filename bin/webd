@@ -1,0 +1,72 @@
+#!/bin/bash
+#
+# webd     Startup script for the webd server
+#
+# chkconfig: 345 99 00
+# description: XOP web server: Nginx and Mongrel
+#
+# processname: webd
+# config: /etc/sysconfig/webd
+# pidfile: /var/run/webd.pid
+### BEGIN INIT INFO
+# Required-Start: mysqld
+# Required-Stop: mysqld
+### END INIT INFO
+
+# Source function library
+#. /etc/init.d/functions
+
+if [ -f /etc/sysconfig/webd ]; then
+   . /etc/sysconfig/webd
+fi
+
+export RAILS_ROOT=/var/www/xop-landing-page
+export RAILS_ENV=production
+
+PATH="/usr/local/bin:${PATH}"
+export PATH
+
+RETVAL=0
+
+umask 007
+
+
+start() {
+
+   echo -n $"Starting webd: "
+
+   stop
+
+   su -c 'cd /var/www/xop-landing-page && bundle exec puma -e production -b unix:///var/www/xop-landing-page/tmp/puma.sock --pidfile /var/www/xop-landing-page/tmp/pids/puma.pid -d'
+
+   echo
+   return $RETVAL
+
+}
+
+stop() {
+
+#   /var/www/xop-landing-page/bin/webmon stop
+   /bin/rm -f $RAILS_ROOT/tmp/sockets/puma.sock
+   return 0
+
+}
+
+
+case "$1" in
+   start)
+      start
+      ;;
+   stop)
+      stop
+      ;;
+   restart)
+      stop
+      start
+      ;;
+   *)
+      echo $"Usage: $0 {start|stop|restart}"
+      RETVAL=1
+esac
+
+exit $RETVAL

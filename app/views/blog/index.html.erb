@@ -1,0 +1,4 @@
+<% content_for :meta_title, "Blog" %>
+<% content_for :meta_description, "description" %>
+<%= react_component("PageTitle", props: {title: "Our Blog"}, prerender: false) %>
+<%= react_component("Blog", props: {articles: @blog_articles, currentPage: @page, perPage: @per_page, totalCount: BlogArticle.count(:all)}, prerender: false) %>

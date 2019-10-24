@@ -1,0 +1,48 @@
+.customer-support-shortcut {
+  position: relative;
+  margin-top: 128px;
+  margin-bottom: 170px;
+
+  //display: flex;
+  //justify-content: space-between;
+
+  .customer-support-text {
+
+    p {
+      font-family: Nunito;
+      font-size: 4em;
+      max-width: 770px;
+      color: #213d63;
+      text-transform: uppercase;
+      font-weight: normal;
+    }
+
+    .readMore {
+      margin-top: 20px;
+    }
+  }
+
+  .customer-support-side-container {
+    //display: flex;
+    //justify-content: flex-end;
+    position: absolute;
+    top: -150px;
+    right: 0;
+
+    @media only screen and (max-width: 1235px) {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 710px) {
+  .customer-support-shortcut .customer-support-text p {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .customer-button {
+    display: flex;
+    justify-content: center;
+  }
+}

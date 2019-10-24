@@ -1,0 +1,8 @@
+<% content_for :meta_title, "About Us" %>
+<% content_for :meta_description, "description" %>
+
+<%= react_component("PageTitle", props: {title: "About Us"}, prerender: false) %>
+<%= react_component("PageIntroduction", props: {title: "A group of telecom hardened engineers based in Dallas, Texas", text: "<p>We are a group of telecom hardened engineers with distinguished backgrounds. Each one of our team members brings valuable experience gained at companies such as Alcatel, Lucent, DSC Communications, MCI, Cisco, Toshiba, NEC and several startups. The “XOP” in our company’s name signifies “Everything Over Packets”.</p><p>With advances in voice over packet technologies and the continued growth of the Internet, the stage has been set for a revolution of new applications and services. We continue to add innovative applications and features to our Value Added Service applications that are supported on legacy TDM and VOIP networks.</p><p>XOP Networks was founded in January 2003 and is a privately held corporation. We market our products worldwide through our OEM partners, re-sellers/channel partners & direct sales.</p>"}, prerender: false) %>
+<%= react_component("BlueSection", props: {molecule: "SloganDescription", backgroundImg: false, btnName: "Read More", slogan: "Slogan text for the company."}, prerender: false) %>
+<%= react_component("TeamList", props: {teamList: @team_list.as_json.to_a}, prerender: false) %>
+<%= react_component("SloganWithRedirect", props: {btnText: "Contact Us", slogan: "Do not wait any longer get in touch now.", textPos: 'ŗight', link: "/contact-us"}, prerender: false) %>

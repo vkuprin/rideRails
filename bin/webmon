@@ -1,0 +1,327 @@
+#!/usr/local/bin/ruby
+#-------------------------------------------------------------------------------
+# webmon.rb
+#
+# Copyright (c) 2013 XOP Networks, Inc.
+#-------------------------------------------------------------------------------
+require 'etc'
+require 'syslog'
+require 'logger'
+require 'fileutils'
+require 'syslog'
+
+$:.push("#{File.dirname(__FILE__)}/../lib")
+
+Signal.trap('TERM') do
+#  $logger.info 'Received terminate signal.'
+  raise Interrupt
+end
+
+def shutdown process_group_id
+
+  Signal.trap('TERM', 'IGNORE')
+
+  begin
+    $logger.info 'Stopping sub-processes.'
+    Process.kill('-TERM', process_group_id)
+    Process.waitall
+    $logger.info 'Stop complete.'
+  rescue Exception=>error
+    $logger.error "terminating process group failed: #{error}"
+  end
+
+end
+
+##########################################################################
+# Subroutine to fork webserver process. The argument is a number from 0 to 9
+##########################################################################
+def fork_webserver webserver_id
+
+   pid = Process.fork
+   if pid
+
+     $logger.info "starting webserver for socket 700#{webserver_id}: pid=#{pid}"
+
+     $pid_to_webserver[pid] = webserver_id
+
+     exec_name = 'thin.' + webserver_id.to_s
+
+     $active_child_info[pid] = {'name'=>exec_name}
+
+     return
+
+   end
+
+   # Child process
+   $logger.close
+   $lockfile.close
+
+   # # If we are running as root, change our user to wwwrun
+   # if Process.uid == 0
+   #
+   #   $wwwrun_info = Etc.getpwnam('wwwrun')
+   #
+   #   # Drop our user and group privileges to the level of wwwrun
+   #   Process::GID.change_privilege($wwwrun_info.gid)
+   #   Process::UID.change_privilege($wwwrun_info.uid)
+   #
+   # end
+
+
+   low_level_error_log = File.open("#{$rails_root}/log/webserver.700#{webserver_id}.log", "w")
+   low_level_error_log.sync = true
+   STDOUT.reopen(low_level_error_log)
+   STDERR.reopen(low_level_error_log)
+
+    #system("/usr/bin/env thin start \
+    #       -l /home/wwwrun/log/webserver.700#{webserver_id}.log \
+    #       -e production -a 127.0.0.1 -c /home/wwwrun -p 700#{webserver_id} \
+    #       -P tmp/pids/webserver.700#{webserver_id}.pid")}
+   ENV['PRODUCTION_LOG'] = "#{$rails_root}/log/production.#{webserver_id}.log"
+   Process.exec('/usr/local/bin/thin',
+                '-l', "log/webserver.700#{webserver_id}.log",
+                '-e', 'production',
+                '-a', '127.0.0.1',
+                '-c', $rails_root,
+                '-p', "700#{webserver_id}",
+                '-P', "tmp/pids/webserver.700#{webserver_id}.pid",
+                'start')
+
+   log_message = "exec of /usr/local/bin/thin failed #{$!}"
+   Syslog.log(Syslog::LOG_INFO, log_message)
+   exit(77)
+
+end
+
+##########################################################################
+# Subroutine to spawn additional processes we will manage
+##########################################################################
+def fork_exec exec_hash
+
+   pid = Process.fork
+   if pid
+     $logger.info "starting process: name=\"#{exec_hash['name']}\" pid=#{pid}"
+#     $active_child_pids["#{exec_hash['name']}"] = pid
+     $active_child_info[pid] = exec_hash
+     return
+   end
+
+  # child process
+  begin
+
+    stderr_filename = 'log/' + File.basename("#{exec_hash['name']}", '.*') + '.stderr'
+
+    # # If we are running as root, change our user to wwwrun
+    # if Process.uid == 0 && "#{exec_hash['user']}" == 'wwwrun'
+    #
+    #   begin
+    #     FileUtils.chown 'wwwrun', 'wwwrun', stderr_filename
+    #   rescue
+    #   end
+    #
+    #   $wwwrun_info = Etc.getpwnam('wwwrun')
+    #   # Drop our user and group privileges to the level of wwwrun
+    #   Process::GID.change_privilege($wwwrun_info.gid)
+    #   Process::UID.change_privilege($wwwrun_info.uid)
+    #
+    # end
+
+    $logger.close
+    $lockfile.close
+
+    begin
+      if File.size(stderr_filename) > 65535
+        File.rename(stderr_filename, stderr_filename + '.old')
+      end
+      rescue
+    end
+    STDERR.reopen stderr_filename, 'a'
+
+    Process.exec "#{exec_hash['name']}"
+
+   rescue Exception=>error
+     $logger.info "webmon: exec of the \"#{exec_hash['name']}\" failed error=#{error} dir=#{Dir.pwd}"
+     $logger.info '---------BEGIN STACK TRACE--------------------'
+     $logger.info error.backtrace.join("\n")
+     $logger.info '---------END STACK TRACE--------------------'
+   end
+
+   exit(77)
+
+end
+
+##########################################################################
+#  ***************------> ENTRY POINT OF THE SCRIPT <----- ***************
+##########################################################################
+
+
+$rails_root = File.expand_path(File.dirname(__FILE__) + '/..')
+Dir.chdir $rails_root
+
+# If we are to stop the service, then use the fuser call to kill any processes
+# using the lockfile, then request a lock on the file, which will become available
+# when the process using it exits.
+if ARGV[0] == 'stop'
+
+  # Make sure only one 'stop' at a time can be running
+  stop_lock = File.new('webmon_stop.lock', 'a')
+
+  if stop_lock.flock(File::LOCK_EX | File::LOCK_NB)
+
+    # Using the fuser system call, send a TERM signal to any holder of
+    # the webmon lock.
+    Kernel.system('fuser -k webmon.lock -TERM') if File.exists? 'webmon.lock'
+
+    # Acquire the webmon lock, in order to verify the webmon we signaled
+    # is down.
+    File.new('webmon.lock', 'a').flock(File::LOCK_EX)
+
+  else
+    STDERR.puts 'webmon: stop is already in progress.'
+  end
+
+  exit
+
+end
+
+
+# Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS)
+# Syslog.log(Syslog::LOG_INFO, "====> INITIATING <====")
+
+if Process.uid == 0
+
+  # Fork a new process to run in the background.  We cannot use the Daeomons gem or Process.daemon
+  # because that would close the stderr file and we would not be able to print an error message.
+  exit if Process.fork
+
+else
+  $logger = Logger.new(STDERR)
+end
+
+$lockfile = File.new('webmon.lock', 'a')
+if !$lockfile.flock(File::LOCK_EX | File::LOCK_NB)
+    STDERR.puts 'webmon: cannot acquire program lock: another copy is already running. exiting.'
+    exit(1)
+end
+
+
+# Run completely in the background now
+STDIN.reopen '/dev/null'
+STDOUT.reopen '/dev/null', 'w'
+STDERR.reopen 'log/webmon.stderr', 'w'
+
+$pid_to_webserver = {}
+
+$logger = Logger.new('log/webmon.log', 5, 100000)
+$logger.level = Logger::DEBUG
+$logger.formatter = proc do |severity, datetime, progname, msg|
+  "[#{datetime.strftime('%F %T')}] #{severity} #{msg}\n"
+end
+
+$logger.info "webmon starting"
+
+begin
+  Syslog.open("SystemEvent", Syslog::LOG_PID, Syslog::LOG_USER)
+rescue Exception=>error
+  $logger.error "could not open syslog: error=#{error}"
+end
+
+# $active_child_pids = Hash.new
+$active_child_info = Hash.new
+
+
+##############################################################
+# Startup processing.
+##############################################################
+$NUM_WEBS = 3
+
+
+# Set an environment variable so that all forked processes know they
+# are being managed by webmon.
+ENV['webmon'] = '1'
+
+MAX_RESTARTS = 5
+
+process_group = Process.getpgrp
+
+begin
+
+  ##############################################################
+  # Start each of the webserver processes
+  ##############################################################
+  (0..$NUM_WEBS-1).each do |i|
+    fork_webserver i
+  end
+
+  $logger.info "done forking execs: #{$pid_to_webserver}"
+
+  num_restarts_done = 0
+
+  $active_child_info.each do |child_pid, child_info|
+    $logger.info "active child process: name=#{child_info['name']} pid=#{child_pid}"
+  end
+
+  ##############################################################
+  # Wait for any process to stop.
+  ##############################################################
+  while $active_child_info.size
+
+    begin
+      failed_pid = Process.wait
+    rescue Errno::ECHILD
+      break
+    end
+
+    failed_process_info = $active_child_info[failed_pid]
+
+    log_message = "waited process exited: process=#{failed_process_info['name']} status=#{$?} exit_code=#{$?.exitstatus} num_restarts_done=#{num_restarts_done}"
+    $logger.info log_message
+    begin
+      Syslog.log Syslog::LOG_ERR, log_message
+    rescue Exception=>error
+      $logger.error "could not log to syslog: error=#{error}"
+    end
+
+    next if $?.exitstatus == 77  # exec failed -- no sense retrying
+
+    if num_restarts_done >= MAX_RESTARTS
+
+      $logger.info "too many process failures detected: #{num_restarts_done}: shutting system down"
+      shutdown process_group
+
+    else
+
+      sleep(5)
+      failed_webserver = $pid_to_webserver[failed_pid]
+      if failed_webserver
+
+        $pid_to_webserver.delete(failed_pid)
+
+        fork_webserver failed_webserver
+        num_restarts_done += 1
+
+      else
+
+        failed_process_info = $active_child_info[failed_pid]
+        if failed_process_info['give_up_on_excessive_failures']
+          num_restarts_done += 1
+          fork_exec failed_process_info
+        else
+          failed_process_info['num_restarts_done'] += 1
+          fork_exec failed_process_info if failed_process_info['num_restarts_done'] < MAX_RESTARTS
+        end
+      end
+
+      $active_child_info.delete failed_pid
+
+    end
+
+  end
+
+rescue Interrupt=>interrupt
+  $logger.info "Interrupted: #{interrupt}.  Shutting down."
+  shutdown process_group
+end
+
+$logger.info "====> TERMINATING <===="
+

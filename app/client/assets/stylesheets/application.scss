@@ -1,0 +1,41 @@
+@import 'normalize', 'animate';
+
+$desktops: "(min-width: 1281px)";
+$laptops: "(min-width: 1025px) and (max-width: 1280px)";
+$tablets_portrait: "(min-width: 768px) and (max-width: 1024px)";
+$tablets_landscape: "(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)";
+$smartphones_landscape: "(min-width: 481px) and (max-width: 767px)";
+$smartphones_portrait: "(min-width: 320px) and (max-width: 480px)";
+$smallest_devices: "(max-width: 320px)";
+
+body {
+  font-family: 'Nunito', sans-serif;
+  overflow-x: hidden;
+  z-index: 10000;
+  background-color: #ffff;
+}
+
+.inner-container {
+  margin: 0 auto;
+  max-width: 1170px;
+
+
+  @media only screen and (max-width: 1235px) {
+    padding: 30px;
+  }
+}
+
+
+body::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+body::-webkit-scrollbar-thumb {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #333;
+}
+
+body::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}

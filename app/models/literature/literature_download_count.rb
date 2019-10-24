@@ -1,0 +1,2 @@
+class LiteratureDownloadCount < ApplicationRecord
+end

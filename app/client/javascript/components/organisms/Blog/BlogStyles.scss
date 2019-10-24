@@ -1,0 +1,29 @@
+.container-blog {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.page-number-blog {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  background-color: #eaebf3;
+  flex-direction: row; /* make main axis horizontal (default setting) */
+  justify-content: center; /* center items horizontally, in this case */
+  align-items: center;
+  font-weight: bold;
+  margin-top: 66px;
+  margin-right: 14px;
+}
+
+.page-number-blog:hover, .page-number-blog.active {
+  background-color: #b0be36;
+  color: #fff;
+}
+
+.pagination-blog {
+  list-style: none;
+  cursor: pointer;
+}

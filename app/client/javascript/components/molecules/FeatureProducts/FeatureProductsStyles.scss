@@ -1,0 +1,122 @@
+.feature_products{
+  margin-top: 9%;
+}
+
+.feature_boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature_box {
+  height: 440px;
+  width: 370px;
+  padding: 20px 28px 32px;
+}
+
+.feature_box:hover {
+  border-radius: 20px;
+  box-shadow: 0 3px 19.9px 4.1px rgba(13, 49, 100, 0.11);
+  border: solid 0 #045488;
+  cursor: pointer;
+}
+
+.feature_title{
+  font-family: Nunito;
+  font-size: 40px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #abbc35;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
+div.header_block > ul > li > a {
+  color: #233d63;
+}
+
+.feature_box_title {
+  height: 46px;
+  text-transform: uppercase;
+  font-family: Nunito;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  //width: 264px;
+  text-align: center;
+  color: #324e74;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature_box_subtitle {
+  width: 314px;
+  height: 104px;
+  margin: 24px auto;
+  font-family: Lato;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: justify;
+  color: #233d63;
+}
+
+.feature_learnmore {
+  font-family: Nunito;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #aabe00;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  //margin: 0 auto;
+}
+.feature_icon {
+  display: block;
+  margin: 0 auto 24px;
+}
+
+.feature_icon_horizontal {
+  display: block;
+  margin: 23px auto;
+}
+
+.zoom:hover {
+  transform: scale(1.1);
+  transition: all .2s ease-in-out;
+}
+
+@media only screen and (max-width: 900px) {
+  .feature_title {
+    margin-top: 40px;
+    font-size: 28px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .feature_boxes {
+    justify-content: unset;
+  }
+
+  .feature_products {
+    flex-direction: column;
+    display: flex;
+    margin-top: 9%;
+    justify-content: center;
+  }
+}

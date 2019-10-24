@@ -1,0 +1,9 @@
+<% content_for :meta_title, @product.name %>
+<% content_for :meta_description, @product.overview %>
+
+<%= react_component("PageTitle", props: {title: "Section - #{@product.name}"}, prerender: false) %>
+<%= react_component("DetailedFeatureList", props: {purpose: @product.purpose, list: @product.get_features.as_json}, prerender: false) %>
+<%= react_component("BlueSection", props: {molecule: "FeatureList", list: @product.get_highlighted_features.as_json, backgroundImg: false}) %>
+<%= react_component("OverviewText", props: {title: "Product Overview", description: @product.overview.to_s}, prerender: false) %>
+<%= react_component("Applications", props: {list: @product.get_listed_features.as_json}, prerender: false) %>
+<%= react_component("SloganWithRedirect", props: {btnText: "Contact Us", slogan: "Do not wait any longer get in touch now.", textPos: 'ŗight', link: "/contact-us"}, prerender: false) %>

@@ -1,0 +1,31 @@
+.pageHeader {
+  background: #254671;
+  background: -moz-linear-gradient(left, #254671 17%, #aebc38 100%);
+  background: -webkit-linear-gradient(left, #254671 17%, #aebc38 100%);
+  background: linear-gradient(to right, #254671 17%, #aebc38 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#254671', endColorstr='#aebc38', GradientType=1);
+  padding: 50px 0 50px 0;
+  position: relative;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+
+  :after {
+    background-image: url("../../../../assets/images/blue-bottom-reverse.png");
+    background-repeat: no-repeat;
+    background-position-x: right;
+    content: "";
+    height: 50px;
+    width: calc(100% - 20px);
+    position: absolute;
+    right: 20px;
+    bottom: -50px;
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: 32px;
+  }
+}

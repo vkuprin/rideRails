@@ -1,0 +1,14 @@
+<% content_for :meta_title, "Testimonials" %>
+<% content_for :meta_description, "description" %>
+
+<%= react_component("PageTitle", props: {title: "Testimonials"}, prerender: false) %>
+
+<div class="inner-container testimonials">
+  <% @testimonials.each_with_index do |d, i| %>
+    <%= react_component("SmallTextWithImg", props: {subject: d.name, subText: d.position, text: d.text}, prerender: false) %>
+    <% if i != (@testimonials.length - 1) %>
+      <%= react_component("Separator", props: {position: "left"}, prerender: false) %>
+    <% end %>
+  <% end %>
+</div>
+

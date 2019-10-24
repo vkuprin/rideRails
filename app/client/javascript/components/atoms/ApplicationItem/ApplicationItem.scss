@@ -1,0 +1,37 @@
+.application_item {
+  font-family: Nunito;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: white;
+  width: 470px;
+  padding: 25px;
+
+  .application_icon {
+    display: inline-block;
+    margin-right: 31px;
+  }
+
+  &:hover {
+    background-color: white;
+    color: #1a3a66;
+    border-radius: 14px;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 1205px) {
+    font-size: 18px;
+    padding: 23px;
+  }
+
+  @media only screen and (max-width: 550px) {
+    width: 300px;
+  }
+}
+
+
+

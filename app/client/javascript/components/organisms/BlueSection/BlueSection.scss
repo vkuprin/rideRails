@@ -1,0 +1,123 @@
+$desktops: "(min-width: 1281px)";
+$laptops: "(min-width: 1025px) and (max-width: 1280px)";
+$tablets_portrait: "(min-width: 768px) and (max-width: 1024px)";
+$tablets_landscape: "(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)";
+$smartphones_landscape: "(min-width: 481px) and (max-width: 767px)";
+$smartphones_portrait: "(min-width: 320px) and (max-width: 480px)";
+$smallest_devices: "(max-width: 320px)";
+
+.blue-section {
+  height: 750px;
+  width: 100%;
+  margin: 98px auto;
+  text-align: center;
+  display: block;
+  background: #254f88; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #254f88 0%, #183963 68%, #1e3a5d 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #254f88 0%, #183963 68%, #1e3a5d 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #254f88 0%, #183963 68%, #1e3a5d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#254f88', endColorstr='#1e3a5d', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+  position: relative;
+  z-index: 1;
+
+  @media #{$desktops}, #{$laptops} {
+    height: 750px;
+  }
+
+  @media #{$tablets_landscape}{
+    height: 750px;
+  }
+
+  @media #{$tablets_portrait}{
+    height: 600px;
+  }
+
+  @media #{$smartphones_landscape}{
+    height: 750px;
+  }
+
+  @media #{$smartphones_portrait}{
+    height: 620px;
+  }
+
+  @media #{$smallest_devices}{
+    height: 550px;
+  }
+
+  &:before {
+    background-image: url("../../../../assets/images/top-green.png");
+    background-repeat: no-repeat;
+    left: 0px;
+    content: "";
+    margin-right: 10px;
+    height: 94px;
+    width: 100%;
+    margin-top: -2px;
+    position: absolute;
+  }
+
+  &:after {
+    background-image: url("../../../../assets/images/bottom-green.png");
+    background-repeat: no-repeat;
+    background-position-x: right;
+    content: "";
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    right: 20px;
+    bottom: -50px;
+    display: inline-block;
+  }
+
+  .outer-background {
+    background-image: url("../../../../assets/images/videoblocks.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 750px;
+    position: absolute;
+    z-index: -1;
+
+    @media #{$desktops}, #{$laptops} {
+      height: 750px;
+    }
+
+    @media #{$tablets_landscape}{
+      height: 750px;
+    }
+
+    @media #{$tablets_portrait}{
+      height: 600px;
+    }
+
+    @media #{$smartphones_landscape}{
+      height: 750px;
+    }
+
+    @media #{$smartphones_portrait}{
+      height: 620px;
+    }
+
+    @media #{$smallest_devices}{
+      height: 550px;
+    }
+  }
+
+  .inner-container {
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+
+    @media #{$tablets_portrait}, #{$tablets_landscape}, #{$smartphones_landscape}, #{$smartphones_portrait}, #{$smallest_devices}{
+      padding: 0 20px 0 20px;
+    }
+
+
+    .readMore {
+      margin-top: 10%;
+    }
+  }
+}

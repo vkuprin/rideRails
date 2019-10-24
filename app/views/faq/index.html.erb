@@ -1,0 +1,4 @@
+<% content_for :meta_title, "FAQ" %>
+<% content_for :meta_description, "description" %>
+<%= react_component("PageTitle", props: {title: "FAQ"}, prerender: false) %>
+<%= react_component("Faq", prerender: false, props: {itemList: @faq_item_list}) %>

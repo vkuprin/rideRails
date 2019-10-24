@@ -1,0 +1,80 @@
+$desktops: "(min-width: 1281px)";
+$laptops: "(min-width: 1025px) and (max-width: 1280px)";
+$tablets_portrait: "(min-width: 768px) and (max-width: 1024px)";
+$tablets_landscape: "(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)";
+$smartphones_landscape: "(min-width: 481px) and (max-width: 767px)";
+$smartphones_portrait: "(min-width: 320px) and (max-width: 480px)";
+$smallest_devices: "(max-width: 320px)";
+
+.slogan-with-description {
+
+  .slogan {
+    color: #fff;
+    font-size: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    @media #{$desktops}, #{$laptops} {
+      font-size: 60px;
+    }
+
+    @media #{$tablets_landscape}{
+      font-size: 50px;
+    }
+
+    @media #{$tablets_portrait}{
+      font-size: 50px;
+      padding-top: 100px;
+    }
+
+    @media #{$smartphones_landscape}{
+      font-size: 40px;
+      padding-top: 170px;
+    }
+
+    @media #{$smartphones_portrait}{
+      font-size: 30px;
+      padding-top: 90px;
+    }
+
+    @media #{$smallest_devices}{
+      font-size: 20px;
+      padding-top: 70px;
+    }
+  }
+
+  .description {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 30px;
+    color: #fff;
+
+    @media #{$desktops}, #{$laptops},  #{$tablets_landscape} {
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    @media #{$tablets_portrait}{
+      font-size: 20px;
+      line-height: 27px;
+    }
+
+    @media #{$smartphones_landscape}{
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    @media #{$smartphones_portrait}{
+      font-size: 15px;
+      line-height: 23px;
+    }
+
+    @media #{$smallest_devices}{
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+
+}

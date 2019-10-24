@@ -1,0 +1,9 @@
+<% content_for :meta_title, "Mobile Conferencing" %>
+<% content_for :meta_description, "description" %>
+
+<%= react_component("PageTitle", props: {title: "Mobile Conferencing"}, prerender: false) %>
+<%= react_component("DetailedFeatureList", props: {purpose: "Send a sms and trigger a dial-out conference", list: @application.get_features.as_json}, prerender: false) %>
+<%= react_component("BlueSection", props: {molecule: "FeatureList", list: @application.get_highlighted_features.as_json, backgroundImg: false}) %>
+<%= react_component("OverviewText", props: {title: "Product Overview", description: @application.overview.to_s}, prerender: false) %>
+<%= react_component("Applications", props: {list: @application.get_listed_features.as_json}, prerender: false) %>
+<%= react_component("SloganWithRedirect", props: {btnText: "Contact Us", slogan: "Do not wait any longer get in touch now.", textPos: 'ŗight', link: "/contact-us"}, prerender: false) %>

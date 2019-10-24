@@ -1,0 +1,2 @@
+class TrainingVideoCategory < ApplicationRecord
+end

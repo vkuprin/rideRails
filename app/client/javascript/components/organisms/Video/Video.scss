@@ -1,0 +1,37 @@
+.tab_title {
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: justify;
+  color: #233d63;
+  margin-bottom: 45px;
+   margin-top: 40px;
+}
+
+.tab_inside {
+  margin: 25px;
+  width: 973px;
+  font-family: Lato;
+  font-size: 18px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: justify;
+  color: #233d63;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.tab-content {
+  margin-bottom: 50px;
+}
+
+ .tab_inside > li {
+   margin-top: 20px;
+ }

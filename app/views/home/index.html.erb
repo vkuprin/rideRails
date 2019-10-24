@@ -1,0 +1,10 @@
+<%= react_component("Head", prerender: false) %>
+<%= react_component("FeatureProducts", prerender: false) %>
+<%= react_component("BlueSection", props: {molecule: "SloganDescription", btnName: "More About Us", slogan: "Quality you can trust", description: "<p>XOP Networks products utilize state-of-the-art hardware and software components, are</p><p>based on Linux Operating System, provide <b>99.999%</b> availability.</p>"}, prerender: false) %>
+<%= react_component("News", prerender: false) %>
+<%= react_component("Applications", props: {
+  list: [{id: 1, feature: "Audio Conferencing"}, {id: 2, feature: "Mission Critical Conferencing"}, {id: 3, feature: "Secure Audio Conferencing"}, {id: 4, feature: "Mobile Conferencing"}, {id: 5, feature: "Instant Conferencing"}, {id: 6, feature: "Hoot-n-Holler Conferencing"}, {id: 7, feature: "Firebar Conferencing"}, {id: 8, feature: "Web Conferencing"}, {id: 9, feature: "Desktop Video Conferencing"}]
+}, prerender: false) %>
+<%= react_component("SectionPDF", prerender: false) %>
+<%= react_component("TestimonialsCarousel", prerender: false) %>
+<%= react_component("SloganWithRedirect", props: {btnText: "Contact Us", slogan: "Our customer support is always there to help you.", link: "/support"}, prerender: false) %>

@@ -1,0 +1,72 @@
+.separator {
+  margin: 40px auto 60px auto;
+}
+
+.application {
+  background: #aebc35; /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  #aebc35 0%, #8ea531 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  #aebc35 0%,#8ea531 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  #aebc35 0%,#8ea531 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aebc35', endColorstr='#8ea531',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  width: 100%;
+  min-height: 705px;
+}
+
+.application_items {
+  flex-wrap: wrap;
+  justify-content: center;
+  display: flex;
+}
+
+.application_first {
+  margin-right: 150px;
+}
+
+.application_title {
+  width: 285px;
+  height: 28px;
+  font-family: Nunito;
+  font-size: 40px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  margin: 0 auto;
+  padding-top: 100px;
+  text-transform: uppercase;
+}
+
+
+//@media only screen and (max-width:1086px) {
+//  .application {
+//    height: 1064px;
+//  }
+//  .application_item {
+//    font-size: 18px;
+//    padding: 23px;
+//  }
+//  .application_first {
+//    margin-right: 0;
+//  }
+//  .application_title {
+//    font-size: 28px;
+//  }
+//}
+
+@media only screen and (max-width: 1205px) {
+  .application {
+    height: 100%;
+  }
+
+  .application_title {
+    font-size: 28px;
+  }
+
+  .application_first {
+    margin-right: 0;
+  }
+}
+

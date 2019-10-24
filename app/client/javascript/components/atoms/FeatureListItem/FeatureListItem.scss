@@ -1,0 +1,25 @@
+.feature-list-item {
+  max-width: 465px;
+  margin-left: 20px;
+
+  .icon {
+    margin-bottom:20px;
+    color: #fff;
+  }
+
+  .feature {
+    color: #b4c801;
+    font-size: 24px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+  }
+
+  .description {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 23px;
+    font-family: 'Lato';
+    font-weight: 300;
+  }
+}

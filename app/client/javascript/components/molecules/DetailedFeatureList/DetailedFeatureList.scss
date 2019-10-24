@@ -1,0 +1,47 @@
+.detailed-feature-list {
+  margin-top: 100px;
+
+  .inner-container{
+    display: flex;
+    justify-content: space-between;
+
+    .info {
+      flex-direction: column;
+      margin-right: 10%;
+
+      .slogan {
+        color: #1a3a67;
+        font-family: Nunito;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .separator {
+        float: left;
+      }
+
+      .feature-list {
+        clear: both;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .side-container{
+      display: flex;
+      justify-content: flex-end;
+      margin-top:5%;
+
+      .side-image{
+
+      }
+
+      @media only screen and (max-width: 1235px) {
+        display:none;
+      }
+    }
+  }
+}

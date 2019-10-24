@@ -1,0 +1,127 @@
+.news {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%
+}
+
+.news_image {
+  border-radius: 20px;
+  box-shadow: 0 3px 19.9px 4.1px rgba(13, 49, 100, 0.11);
+  border: solid 0 #045488;
+}
+
+.news_title{
+    font-family: Nunito;
+    font-size: 40px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1a3a67;
+    margin: 0 auto;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 700px) {
+  .news {
+    display: unset;
+    justify-content: unset;
+  }
+
+  .news_subtitle {
+    width: unset;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+
+  .news_title {
+    font-size: 28px;
+  }
+
+  .news_title_box {
+    font-size: 20px;
+  }
+
+  .news_subtitle {
+    font-size: 16px;
+  }
+
+  .news_box_one {
+    margin-bottom: 58px;
+    margin-right: 0 !important;
+  }
+
+  .news_image {
+    width: 350px;
+  }
+}
+
+.news_title_box {
+  width: 407px;
+  font-family: Nunito;
+  font-size: 24.5px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b4c801;
+  margin-bottom: 22px;
+  margin-top: 22px;
+}
+
+.news_subtitle {
+  width: 450px;
+  height: 81px;
+  font-family: Lato;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #324e74;
+}
+
+.news_boxes {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.news_box_one {
+  margin-right: 95px;
+}
+
+.news_box {
+  width: 468px;
+}
+
+.news_button {
+  margin-top: 40px;
+  margin-bottom: 80px;
+
+  width: 183px;
+  font-size: 17px;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.2s ease-in-out;
+  padding: 15px 5px 15px 5px;
+  background-color: #213d63;
+  border-radius: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.news_button:hover {
+  background-color: #b0be36;
+}

@@ -1,0 +1,15 @@
+<% content_for :meta_title, "Products" %>
+<% content_for :meta_description, "description" %>
+<%# content_for :meta_image, cl_image_path(@offer.photo.path) %>
+
+product page.
+
+<a href="/">go back</a>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <a href="/product/<%= product.id.to_s + '-' + product.name.parameterize %>"><%= product.name %></a>
+    </li>
+  <% end %>
+</ul>

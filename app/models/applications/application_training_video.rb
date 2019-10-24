@@ -1,0 +1,2 @@
+class ApplicationTrainingVideo < ApplicationRecord
+end

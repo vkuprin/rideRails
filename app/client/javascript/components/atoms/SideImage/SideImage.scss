@@ -1,0 +1,51 @@
+.parallax {
+  perspective: 1px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.side_image_crop {
+  position: absolute;
+  width: 624px;
+  height: 720px;
+  top: 0px;
+  right: 0;
+}
+
+.side_image_wrapper {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.side_image_crop_inner {
+  position: absolute;
+}
+
+.side_image_inner {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  bottom: -212px;
+  right: 0px;
+  z-index: 10;
+  width: 624px;
+  height: 720px;
+}
+
+.side_images {
+  position: absolute;
+  right: 0;
+  bottom: -212px;
+}
+
+.side_tringle {
+  position: absolute;
+  right: 0;
+  top: -97px;
+  width: 550px;
+}
