@@ -1,8 +1,3 @@
-<div align="center">
-    <img style="margin-bottom: 10%" src="app/client/assets/images/logo_alternative.jpg" alt="Logo" width="35%">
-</div>
-
-
 ### Remove old installed node_modules
 ```
 ncu -u  && rm -rf node_modules && yarn
